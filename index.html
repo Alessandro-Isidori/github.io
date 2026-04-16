@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Mio Portfolio</title>
+<script nonce="IATefXXeKPlQOdjc" type="text/javascript" src="//self.adblockultimate.net/manager.js?tm=1776341992&amp;lg=true" guid="{52173442-077B-4832-9C0E-43B147E31515}" inwhitelist="false" status="true" autohide="true"></script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: rgba(255,255,255,0.07);
+    --accent1: #c8f03c;
+    --accent2: #7b61ff;
+    --accent3: #ff6b6b;
+    --text: #f0f0f0;
+    --muted: #888;
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--accent1);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(123,97,255,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(200,240,60,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,240,60,0.12);
+    color: var(--accent1);
+    border: 1px solid rgba(200,240,60,0.3);
+    border-radius: 100px;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+  }
+  .hero-sub {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent1);
+    color: #0a0a0f;
+  }
+  .btn-primary:hover { background: #d4f550; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.3); }
+
+  .hero-chips {
+    position: absolute;
+    right: 3rem;
+    bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    opacity: 0.6;
+  }
+  .chip {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .chip::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* ---- SECTIONS COMMON ---- */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--muted);
+    max-width: 480px;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  /* ---- ABOUT ---- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+  }
+  .about-photo-area {
+    aspect-ratio: 3/4;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    max-width: 360px;
+  }
+  .about-photo-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .photo-placeholder svg { opacity: 0.3; }
+  .about-content {}
+  .about-text {
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .skill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent1);
+    flex-shrink: 0;
+  }
+
+  /* ---- TABS ---- */
+  .tab-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 0.4rem;
+    width: fit-content;
+    border: 1px solid var(--border);
+  }
+  .tab-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 7px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .tab-btn.active {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ---- GALLERY GRID ---- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .gallery-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .gallery-item:hover {
+    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-4px);
+  }
+  .gallery-thumb {
+    aspect-ratio: 16/10;
+    background: var(--surface2);
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover .gallery-thumb img { transform: scale(1.05); }
+  .thumb-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.1);
+    font-size: 3rem;
+  }
+  .gallery-info {
+    padding: 1rem 1.2rem;
+  }
+  .gallery-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.3rem;
+  }
+  .gallery-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+  .gallery-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ---- CALISTHENICS ---- */
+  .cali-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .cali-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cali-card:hover {
+    border-color: rgba(200,240,60,0.2);
+    transform: translateY(-4px);
+  }
+  .cali-img {
+    aspect-ratio: 4/5;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+  }
+  .cali-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cali-badge {
+    position: absolute;
+    top: 0.8rem; left: 0.8rem;
+    background: rgba(10,10,15,0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(200,240,60,0.3);
+    color: var(--accent1);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+  }
+  .cali-info { padding: 1rem 1.2rem; }
+  .cali-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.01em;
+  }
+  .cali-level {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ---- CV SECTION ---- */
+  .cv-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .cv-icon {
+    width: 56px; height: 56px;
+    background: rgba(200,240,60,0.1);
+    border: 1px solid rgba(200,240,60,0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cv-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .cv-meta { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+  .cv-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ---- CONTACT ---- */
+  #contatti { background: var(--surface); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 900px;
+  }
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-val {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-val:hover { color: var(--accent1); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-chips { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.6s ease both 0.1s; }
+  .hero h1 { animation: fadeUp 0.6s ease both 0.2s; }
+  .hero-sub { animation: fadeUp 0.6s ease both 0.3s; }
+  .hero-actions { animation: fadeUp 0.6s ease both 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Alessandro Isidori</div>
+  <ul class="nav-links">
+    <li><a href="#chi-sono">Chi sono</a></li>
+    <li><a href="#lavori">Lavori</a></li>
+    <li><a href="#calisthenics">Calisthenics</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <span class="hero-tag">Game Dev · Arte · Calisthenics</span>
+  <h1>Alessandro<br><em>Isidori</em></h1>
+  <p class="hero-sub">
+    Creo esperienze interattive, esprimo visioni attraverso il disegno
+    e supero i miei limiti con il corpo. Tre passioni, un'unica identità.
+  </p>
+  <div class="hero-actions">
+    <a href="#lavori" class="btn btn-primary">Guarda i lavori</a>
+    <a href="#cv" class="btn btn-outline">Scarica CV</a>
+  </div>
+  <div class="hero-chips">
+    <span class="chip">Sviluppatore</span>
+    <span class="chip">Artista</span>
+    <span class="chip">Atleta</span>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section id="chi-sono">
+  <div class="about-grid">
+    <div class="about-photo-area">
+      <!-- SOSTITUISCI: cambia src con il percorso della tua foto -->
+      <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine2.png">
+    </div>
+    <div class="about-content">
+      <p class="section-label">Chi sono</p>
+      <h2 class="section-title">Creatore su più fronti</h2>
+      <!-- SOSTITUISCI: scrivi qui la tua bio -->
+      <p class="about-text">
+        Ciao! Sono Alessandro Isidori, un appassionato creatore con radici nel mondo dello sviluppo
+        giochi, del disegno e del calisthenics. Ogni progetto che realizzo nasce da una
+        curiosità genuina e dal desiderio di spingere oltre i confini — che sia un livello di
+        un videogioco, un'illustrazione o un muscle-up perfetto.
+      </p>
+      <div class="skills-grid">
+        <!-- SOSTITUISCI: aggiungi le tue competenze -->
+        <div class="skill-item"><span class="skill-dot"></span>Sviluppo Giochi</div>
+        <div class="skill-item"><span class="skill-dot"></span>Godot</div>
+        <div class="skill-item"><span class="skill-dot"></span>Illustrazione digitale</div>
+        <div class="skill-item"><span class="skill-dot"></span>Pixel Art</div>
+        <div class="skill-item"><span class="skill-dot"></span>Calisthenics</div>
+        <div class="skill-item"><span class="skill-dot"></span>C# / JavaScript</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAVORI -->
+<section id="lavori" style="background: var(--surface);">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">I miei lavori</h2>
+  <p class="section-desc">Giochi che ho creato, disegni e illustrazioni — clicca per saperne di più.</p>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('giochi', this)">Giochi</button>
+    <button class="tab-btn" onclick="switchTab('disegni', this)">Disegni</button>
+  </div>
+
+  <!-- TAB GIOCHI -->
+  <div id="tab-giochi" class="tab-panel active">
+    <div class="gallery">
+
+      <!-- ITEM GIOCO 1 — SOSTITUISCI con i tuoi dati -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine1.png" alt="Nome Gioco">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Gioco · 2023-2024</p>
+          <p class="gallery-name">L'impiccato</p>
+          <p class="gallery-desc">L'Impiccato: un classico intramontabile rivisitato in chiave web. 
+            Ho sviluppato questo gioco utilizzando HTML5, CSS3 per il design responsive e JavaScript puro per 
+            la gestione della logica di gioco e la manipolazione dinamica del DOM. Il progetto sfida l'utente a 
+            indovinare una parola segreta, gestendo in tempo reale gli input e l'aggiornamento grafico del patibolo. 
+            Un esperimento leggero ma completo per dimostrare padronanza nello sviluppo di interfacce interattive.</p>
+        </div>
+      </div>
+
+      <!-- ITEM GIOCO 2 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine3.png" alt="Nome Gioco">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Gioco · 2023-2024</p>
+          <p class="gallery-name">Snake</p>
+          <p class="gallery-desc">Snake: il grande classico arcade ricreato da zero. Ho sviluppato questo progetto utilizzando
+             HTML5, CSS3 per l'interfaccia moderna e JavaScript per la gestione dinamica del game loop, del movimento del serpente 
+             e della generazione casuale dei bonus. Il gioco offre un'esperienza fluida e reattiva, ottimizzata per il browser, 
+             mettendo in mostra le basi della logica di programmazione e della manipolazione in tempo reale degli elementi grafici su canvas.</p>
+        </div>
+      </div>
+
+      <!-- ITEM GIOCO 3 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine4.png" alt="Nome Gioco">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Gioco 2023-2024</p>
+          <p class="gallery-name">Forza 4</p>
+          <p class="gallery-desc">Forza 4: la sfida di strategia in versione digitale. Realizzato con HTML, CSS e JavaScript, 
+            questo progetto ricrea il celebre gioco da tavolo utilizzando una griglia dinamica e una logica di rilevamento delle 
+            collisioni per determinare la vittoria (orizzontale, verticale o diagonale). Il codice gestisce l'alternanza dei turni 
+            tra i giocatori e l'animazione della caduta dei gettoni, dimostrando solide basi nella gestione di algoritmi di ricerca e 
+            manipolazione del DOM.</p>
+        </div>
+      </div>
+
+      <!-- ITEM GIOCO 4 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="" alt="Cuore di Ferro">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Prototipo 2025-2026</p>
+          <p class="gallery-name">Cuore di Ferro</p>
+          <p class="gallery-desc">No spoiler</p>
+        </div>
+      </div>
+
+
+      <!-- Aggiungi altri giochi copiando il blocco sopra -->
+
+    </div>
+  </div>
+
+  <!-- TAB DISEGNI -->
+  <div id="tab-disegni" class="tab-panel">
+    <div class="gallery">
+
+      <!-- ITEM DISEGNO 1 — SOSTITUISCI -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine5.png" alt="Titolo">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Disegno · 2020-2021</p>
+          <p class="gallery-name">Snakey</p>
+          <p class="gallery-desc">Per creare questo disegno ho usato diverse gradazioni di grigio e ho cercato di evitare l'uso del tratto peloso, 
+            per crearlo mi sono basato su disegni visti in precedenza e a come mi sentivo in quel momento.</p>
+        </div>
+      </div>
+
+      <!-- ITEM DISEGNO 2 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine6.png" alt="Titolo">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Disegno · 2022-2023</p>
+          <p class="gallery-name">Abbellimento in rame</p>
+          <p class="gallery-desc">Per creare questo disegno ho usato prima diverse matite per una base e poi le matite colorate per creare i contrasti,
+             ho evitato l'uso del tratto peloso, per crearlo mi sono basato su un disegno visto in un libro d'arte.</p>
+        </div>
+      </div>
+
+      <!-- ITEM DISEGNO 3 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine7.png" alt="Titolo">
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Disegno · 2024-2025</p>
+          <p class="gallery-name">skull</p>
+          <p class="gallery-desc">Per creare questo disegno ho usato diverse gradazioni di grigio e ho usato il tratto peloso appositamente per accentuare certe forme, 
+            per crearlo mi sono basato sul famoso film predator e anche in base a come mi sentivo in quel momento.</p>
+        </div>
+      </div>
+
+      <!-- ITEM DISEGNO 4 -->
+      <div class="gallery-item">
+        <div class="gallery-thumb">
+          <!-- <img src="art/disegno1.jpg" alt="Titolo"> -->
+          <div class="thumb-placeholder">🎨</div>
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-label">Disegni</p>
+          <p class="gallery-name">Li vuoi vedere tutti?</p>
+          <p class="gallery-desc">Se sei interessato segui il mio account intagram privato o srivimi una mail. Io ne sarò felice</p>
+        </div>
+      </div>
+
+      <!-- Aggiungi altri disegni copiando il blocco sopra -->
+
+    </div>
+  </div>
+</section>
+
+<!-- CALISTHENICS -->
+<section id="calisthenics">
+  <p class="section-label">Corpo e movimento</p>
+  <h2 class="section-title">Calisthenics</h2>
+  <p class="section-desc">Allenamento a corpo libero: le skill che sto praticando e quelle che ho raggiunto.</p>
+
+  <div class="cali-grid">
+
+    <!-- CARD CALISTHENICS 1 — SOSTITUISCI -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine8.png" alt="Elbow lever">
+        <span class="cali-badge">Raggiunto</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Elbow lever</p>
+        <p class="cali-level">Livello: Intermedio</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine9.png" alt="Muscle Up">
+        <span class="cali-badge">Raggiunto</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Back lever</p>
+        <p class="cali-level">Livello: Intermedio</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine10.png" alt="Front Lever">
+        <span class="cali-badge">Raggiunto</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Dip zavorrati</p>
+        <p class="cali-level">Livello: Intermedio/Avanzato</p>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine11.png" alt="Front Lever">
+        <span class="cali-badge">Raggiunto</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">One hand assisted pull up</p>
+        <p class="cali-level">Livello: Avanzato</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine12.png" alt="Planche">
+        <span class="cali-badge">Raggiunto</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Back lever agli anelli</p>
+        <p class="cali-level">Livello: Avanzato</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine13.png" alt="Front Lever">
+        <span class="cali-badge">In progress</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Muscle up</p>
+        <p class="cali-level">Livello: Intermedio</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine14.png" alt="Planche">
+        <span class="cali-badge">In progress</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Handstand</p>
+        <p class="cali-level">Livello: Elite</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine16.png" alt="Front Lever">
+        <span class="cali-badge">In progress</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Front Lever</p>
+        <p class="cali-level">Livello: Avanzato</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <img src="c:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Immagine15.png" alt="Planche">
+        <span class="cali-badge">Obiettivo & in progress</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Planche</p>
+        <p class="cali-level">Livello: Elite</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="cali-card">
+      <div class="cali-img">
+        <!-- <img src="cali/foto2.jpg" alt="Front Lever"> -->
+        <div class="thumb-placeholder" style="font-size:2.5rem">🏋️</div>
+        <span class="cali-badge">Obiettivo</span>
+      </div>
+      <div class="cali-info">
+        <p class="cali-name">Human flag</p>
+        <p class="cali-level">Livello: Elite</p>
+      </div>
+    </div>
+    <!-- Aggiungi altre skill copiando il blocco sopra -->
+
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv" style="background: var(--surface);">
+  <p class="section-label">Curriculum</p>
+  <h2 class="section-title">Il mio CV</h2>
+  <p class="section-desc">Scarica il mio curriculum in formato PDF per tutti i dettagli sulla mia formazione ed esperienza.</p>
+
+  <div class="cv-box">
+    <div class="cv-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c8f03c" stroke-width="1.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    <div>
+      <!-- SOSTITUISCI il nome del file -->
+      <p class="cv-title">Curriculum Vitae</p>
+      <p class="cv-meta">Ultimo aggiornamento: [Mese Anno] · PDF</p>
+    </div>
+    <div class="cv-actions">
+      <!-- SOSTITUISCI: metti il path del tuo PDF, es. "cv/curriculum.pdf" -->
+      <a href=""C:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Alessandto_Isidori_CV.pdf"" download class="btn btn-primary">Scarica PDF</a>
+      <a href=""C:\Users\isido\OneDrive - ISTITUTO D'ISTRUZIONE SUPERIORE JEAN MONNET\Desktop\Alessandto_Isidori_CV.pdf"" target="_blank" class="btn btn-outline">Visualizza</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <p class="section-label">Parliamo</p>
+  <h2 class="section-title">Contatti</h2>
+  <p class="section-desc">Hai un progetto in mente o vuoi semplicemente conoscermi? Scrivimi.</p>
+
+  <div class="contact-grid">
+    <!-- SOSTITUISCI con i tuoi contatti -->
+    <div class="contact-item">
+      <span class="contact-label">Email</span>
+      <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJZZzNQLRMGsqmxDjfwBWZPdQdjkRFdRrBKKjSBPznHZpRVGdDnpHLFzrJGGctDGcxkXGzg" class="contact-val">isidori.a07@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Instagram</span>
+      <a href="https://www.instagram.com/aleisiofficial?igsh=MWFqejB0Z2pzYTJueg==" target="_blank" class="contact-val">@aleisiofficial</a>
+    </div>
+    <!-- <div class="contact-item">
+      <span class="contact-label">GitHub</span>
+      <a href="https://github.com/tuo_profilo" target="_blank" class="contact-val">github.com/tuo_profilo</a>
+    </div> -->
+    <div class="contact-item">
+      <span class="contact-label">Città</span>
+      <span class="contact-val">Mariano Comense, Italia</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Alessandro Isidori</span>
+  <span>Game Dev · Arte · Calisthenics</span>
+</footer>
+
+<script>
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
